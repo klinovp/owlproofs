@@ -5,6 +5,9 @@ package org.semanticweb.owlapitools.proofs;
 
 import org.semanticweb.owlapi.model.OWLAxiom;
 import org.semanticweb.owlapi.reasoner.OWLReasoner;
+import org.semanticweb.owlapi.reasoner.UnsupportedEntailmentTypeException;
+import org.semanticweb.owlapitools.proofs.exception.ProofGenerationException;
+import org.semanticweb.owlapitools.proofs.expressions.OWLExpression;
 
 /**
  * An extension of the OWL API's {@link OWLReasoner} for reasoners which can
@@ -17,12 +20,13 @@ import org.semanticweb.owlapi.reasoner.OWLReasoner;
 public interface ExplainingOWLReasoner extends OWLReasoner {
 
 	/**
-	 * Returns a {@link Proofs} object which encodes proofs (sequences of
-	 * {@link Inference}s) for this entailment, or {@code null} if the
-	 * entailment does not hold.
+	 * Returns an {@link OWLExpression} object which represents the entailed
+	 * axiom, or {@code null} if the entailment does not hold. All proofs can be
+	 * unwound recursively by calling {@link OWLExpression#getInferences()} on
+	 * each premise.
 	 * 
 	 * @param entailment
 	 * @return
 	 */
-	public Proofs getProofs(OWLAxiom entailment);
+	public OWLExpression getDerivedExpression(OWLAxiom entailment) throws ProofGenerationException, UnsupportedEntailmentTypeException;
 }

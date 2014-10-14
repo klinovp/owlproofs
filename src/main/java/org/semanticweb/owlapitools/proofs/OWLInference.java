@@ -6,6 +6,7 @@ package org.semanticweb.owlapitools.proofs;
 import java.util.Collection;
 
 import org.semanticweb.owlapi.model.OWLAxiom;
+import org.semanticweb.owlapitools.proofs.expressions.OWLExpression;
 
 /**
  * The base interface of inferences. The inference is an elementary step of a
@@ -22,23 +23,18 @@ import org.semanticweb.owlapi.model.OWLAxiom;
  * 
  *         pavel.klinov@uni-ulm.de
  */
-public interface Inference<C> {
+public interface OWLInference {
 
 	/**
 	 * 
 	 * @return
 	 */
-	public OWLAxiom getConclusion();
+	public OWLExpression getConclusion();
 
 	/**
 	 * 
 	 * @return
 	 */
-	public Collection<OWLAxiom> getPremises();
+	public Collection<OWLExpression> getPremises();
 
-	/**
-	 * 
-	 * @return
-	 */
-	public Collection<Condition<C>> getSideConditions();
 }
